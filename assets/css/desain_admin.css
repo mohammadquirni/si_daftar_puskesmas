@@ -1,0 +1,83 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: calibri;
+    
+}
+
+/* Desain pada Header */
+.header {
+    background-color: #3B90FA;
+    padding: 20px;
+    text-align: center;
+}
+
+.header h2, .header p{  
+    color: #ffffff;
+}
+
+/* Desain pada top navigation bar */
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+}
+
+/* Desain pada topnav links */
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Desain untuk mengubah warna hover*/
+.topnav a:hover {
+    background-color: #00FFFF;
+    color: black;
+}
+
+.column {
+    float: left;
+    padding: 10px;
+}
+
+.column.middle {
+    width: 100%; 
+    background-color: #00ffff;
+}
+
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media screen and (max-width: 600px) {
+    .column.side, .column.middle {
+        width: 100%;
+    }
+}
+
+.footer {
+    background-color: #3B90FA;
+    padding: 10px;
+    text-align: center;
+}
+
+.footer a{  
+    color: #ffffff;
+}
+
+
+
+
+
+
+
+
