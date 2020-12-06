@@ -1,9 +1,11 @@
 <?php
 class Config {
   private $host = "localhost";
-  private $db_name = "si_daftar_pasien";
+  // private $db_name = "si_daftar_puskesmas";
+  private $db_name = "urip";
   private $username = "root";
-  private $password = "";
+  // private $password = "";
+  private $password = "root";
   public $conn;
 
   public function getConnection() {
