@@ -1,0 +1,33 @@
+@media screen and (max-width: 720px) {
+    html{
+        height: 100%;
+    }
+    .tulisan-judul h4 {
+		font-size: 14px;
+	}
+	.tulisan-judul a {
+		font-size: 12px;
+    }
+    body {
+        height: 100%;
+        display: flex;
+	    align-items: center;
+    	justify-content: center;
+    }
+}
+
+body {
+	background-color:#F1F1F1;
+}
+.container{
+    display: flex;
+    justify-content: center;
+}
+.mt-8{
+	margin: 80px;
+}
+@media (min-width: 1200px) {
+    .card {
+        max-width: 400px;
+    }
+}

@@ -1,7 +1,7 @@
 <?php
 class Config {
   private $host = "localhost";
-  private $db_name = "si_daftar_puskesmas";
+  private $db_name = "si_daftar_pasien";
   private $username = "root";
   private $password = "";
   public $conn;
