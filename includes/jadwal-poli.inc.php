@@ -1,11 +1,9 @@
 <?php
-class Jadwal_Periksa {
+class Jadwal_Poli {
 	private $conn;
 	private $table_jadwal_periksa = 'jadwal_periksa';
 	private $table_pasien = 'pasien';
 	private $table_poli = 'poli';
-
-	public $today = 2020-12-29;
 
 	public $id_jadwal_periksa;
     public $id_pasien;
@@ -40,19 +38,6 @@ class Jadwal_Periksa {
 	
 	function getNewID() {
 		$query = "SELECT MAX(id_jadwal_periksa) AS code FROM {$this->table_jadwal_periksa}";
-		$stmt = $this->conn->prepare($query);
-		$stmt->execute();
-		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-		if ($row) {
-			return $this->genCode($row["code"], '');
-		} else {
-			return $this->genCode($nomor_terakhir, '');
-		}
-	}
-
-	function getNewAntrian() {
-		$query = "SELECT MAX(nomor_antrian) AS code FROM {$this->table_jadwal_periksa}";
 		$stmt = $this->conn->prepare($query);
 		$stmt->execute();
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
