@@ -41,7 +41,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="view/view_input/tampil_daftar_periksa_pasien_baru.php">Pasien Baru</a>
-              <a class="dropdown-item" href="view/view_input/tampil_daftar_periksa_pasien_lama.php">Pasien Lama</a>
+              <a class="dropdown-item" href="pasien-lama.php">Pasien Lama</a>
             </div>
           </li>
           <li class="nav-item">

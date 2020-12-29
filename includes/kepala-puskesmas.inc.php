@@ -19,8 +19,8 @@ class Kepala_Puskesmas {
 		$stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->id_kepala_puskesmas);
         $stmt->bindParam(2, $this->id_user);
-        $stmt->bindParam(4, $this->nama);
-        $stmt->bindParam(5, $this->nip);
+        $stmt->bindParam(3, $this->nama);
+        $stmt->bindParam(4, $this->nip);
 
 		if ($stmt->execute()) {
 			return true;
@@ -54,7 +54,7 @@ class Kepala_Puskesmas {
 	}
 
 	function readAll() {
-		$query = "SELECT A.id_kepala_puskesmas, A.nama, A.nip, B.username, B.password  FROM {$this->table_kepala_puskesmas} A LEFT JOIN {$this->table_user} B ON A.id_user=B.id_user ORDER BY id_kepala_puskesmas ASC";
+		$query = "SELECT A.id_kepala_puskesmas, A.id_user, A.nama, A.nip, B.username, B.password  FROM {$this->table_kepala_puskesmas} A LEFT JOIN {$this->table_user} B ON A.id_user=B.id_user ORDER BY id_kepala_puskesmas ASC";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
 

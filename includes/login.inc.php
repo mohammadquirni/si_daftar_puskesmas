@@ -6,10 +6,12 @@ class Login {
     private $table_role2 = "poli";
     private $table_role3 = "administrasi";
     private $table_role4 = "kepala_puskesmas";
+    private $table_pasien = "pasien";
 
     public $user;
     public $username;
     public $password;
+    public $nik;
 
     public function __construct($db) {
         $this->conn = $db;
@@ -64,7 +66,17 @@ class Login {
                         $_SESSION['hak_akses'] = $user['hak_akses'];
                         return $user['nama'];
                     }else {
-                        return false;
+                        $user = $this->checkCredentialsPasien();
+                        if ($user) {
+                            $this->user = $user;
+                            session_start();
+                            $_SESSION['nik'] = $user['nik'];
+                            $_SESSION['nama'] = $user['nama'];
+                            $_SESSION['id_pasien'] = $user['id_pasien'];
+                            return $user['nama'];
+                        }else {
+                            return false;
+                        }
                     }
                 }
             }
@@ -120,6 +132,19 @@ class Login {
             $data = $stmt->fetch(PDO::FETCH_ASSOC);
             $submitted_pass = $this->password;
             if ($submitted_pass == $data['password']) return $data;
+        }
+        return false;
+    }
+
+    protected function checkCredentialsPasien() {
+        $stmt = $this->conn->prepare('SELECT * FROM '.$this->table_pasien.' WHERE nik=? AND nama=? LIMIT 1');
+        $stmt->bindParam(1, $this->nik);
+        $stmt->bindParam(2, $this->nama);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            $submitted_pass = $this->nama;
+            if ($submitted_pass == $data['nama']) return $data;
         }
         return false;
     }

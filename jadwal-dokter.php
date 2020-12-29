@@ -2,17 +2,17 @@
 <html>
 
 <?php
-    include("config.php");
+	include("config.php");
+	include_once('includes/jadwal-dokter.inc.php');
 	include_once('includes/dokter.inc.php');
-	include_once('includes/user.inc.php');
 	include_once('includes/poli.inc.php');
 
 	session_start();
 	if (!isset($_SESSION['id_user'])) echo "<script>location.href='login.php'</script>";
     $config = new Config(); $db = $config->getConnection();
 
+	$Jadwal_Dokter = new Jadwal_Dokter($db);
 	$Dokter = new Dokter($db);
-	$User = new User($db);
 	$Poli = new Poli($db);
 ?>
 
@@ -33,21 +33,15 @@
 
 	<?php
 		if($_POST){
-			// post dokter
-			$Dokter->id_dokter = $_POST["id_dokter"];
-			$Dokter->id_poli = $_POST["id_poli"];
-			$Dokter->id_user = $_POST["id_user"];
-			$Dokter->nama = $_POST["nama"];
-			$Dokter->nip = $_POST["nip"];
-			$Dokter->spesialis = $_POST["spesialis"];
+			// post jdawal dokter
+			$Jadwal_Dokter->id_jadwal_dokter = $_POST["id_jadwal_dokter"];
+			$Jadwal_Dokter->id_dokter = $_POST["id_dokter"];
+			$Jadwal_Dokter->id_poli = $_POST["id_poli"];
+			$Jadwal_Dokter->hari = $_POST["hari"];
+			$Jadwal_Dokter->jam_mulai = $_POST["jam_mulai"];
+			$Jadwal_Dokter->jam_selesai = $_POST["jam_selesai"];
 
-			// post user
-			$User->id_user = $_POST["id_user"];
-			$User->username = $_POST["username"];
-			$User->password = $_POST["password"];
-			$User->hak_akses = $_POST["hak_akses"];
-
-			if($User->insert() && $Dokter->insert()){
+			if($Jadwal_Dokter->insert()){
 				echo '<script language="javascript">';
                 echo 'alert("Data Berhasil Terkirim")';
                 echo '</script>';
@@ -65,7 +59,7 @@
 				<!-- Simple Datatable start -->
 				<div class="card-box mb-30">
 					<div class="pd-20">
-						<h4 class="text-blue h4"><i class="dw dw-stethoscope"></i> Data Dokter</h4>
+						<h4 class="text-blue h4"><i class="dw dw-stethoscope"></i> Data Jadwal Dokter</h4>
 						<!-- <p class="mb-0">you can find more options <a class="text-primary" href="https://datatables.net/" target="_blank">Click Here</a></p> -->
 					</div>
 					<div style="padding-right:15px;">
@@ -77,30 +71,24 @@
 						<table class="data-table table stripe hover nowrap">
 							<thead>
 								<tr class="text-center">
-									<th>ID Dokter</th>
-									<th>NIP</th>
-									<th>Nama</th>
-                                    <th>Spesialis</th>
-                                    <th>Poli</th>
-                                    <th>Username</th>
-                                    <th>Password</th>
+									<th>ID</th>
+									<th>Dokter</th>
+									<th>Poli</th>
+                                    <th>Jadwal</th>
 									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
-                                <?php $no=1; $dokters = $Dokter->readAll(); while ($row = $dokters->fetch(PDO::FETCH_ASSOC)) : ?>
+                                <?php $no=1; $jadwal_dokters = $Jadwal_Dokter->readAll(); while ($row = $jadwal_dokters->fetch(PDO::FETCH_ASSOC)) : ?>
 								<tr class="text-center">
-									<td><?=$row['id_dokter']?></td>
-									<td><?=$row['nip']?></td>
-									<td><?=$row['nama']?></td>
-                                    <td><?=$row['spesialis']?></td>
+									<td><?=$row['id_jadwal_dokter']?></td>
+                                    <td><?=$row['nama_dokter']?></td>
                                     <td><?=$row['nama_poli']?></td>
-                                    <td><?=$row['username']?></td>
-                                    <td><?=$row['password']?></td>
+                                    <td><?=$row['hari']?>, <?=$row['jam_mulai']?> - <?=$row['jam_selesai']?></td>
 									<td>
-										<!-- <a class="dropdown-item link-action" href="dokter-detail.php?id=<?php echo $row['id_dokter']; ?>&&id_user=<?php echo $row['id_user']; ?>"><i class="dw dw-eye"></i> Detail</a> |  -->
-										<a class="dropdown-item link-action" href="dokter-update.php?id=<?php echo $row['id_dokter']; ?>&&id_user=<?php echo $row['id_user']; ?>"><i class="dw dw-edit-1"></i> Edit</a> | 
-										<a class="dropdown-item link-action" href="dokter-delete.php?id=<?php echo $row['id_dokter']; ?>&&id_user=<?php echo $row['id_user']; ?>"><i class="dw dw-delete-3"></i> Delete</a>
+										<!-- <a class="dropdown-item link-action" href="jadwal-dokter-detail.php?id=<?php echo $row['id_jadwal_dokter']; ?>"><i class="dw dw-eye"></i> Detail</a> |  -->
+										<a class="dropdown-item link-action" href="jadwal-dokter-update.php?id=<?php echo $row['id_jadwal_dokter']; ?>"><i class="dw dw-edit-1"></i> Edit</a> | 
+										<a class="dropdown-item link-action" href="jadwal-dokter-delete.php?id=<?php echo $row['id_jadwal_dokter']; ?>"><i class="dw dw-delete-3"></i> Delete</a>
 									</td>
 								</tr>
                                 <?php endwhile; ?>
@@ -122,14 +110,17 @@
                                 </div>
                                 <div class="modal-body">
                                     <!-- hidden form -->
-									<input type="hidden" name="id_user" value="<?php echo $User->getNewId(); ?>">
-									<input type="hidden" name="id_dokter" value="<?php echo $Dokter->getNewId(); ?>">
-									<input type="hidden" name="hak_akses" value="dokter">
+									<input type="hidden" name="id_jadwal_dokter" value="<?php echo $Jadwal_Dokter->getNewId(); ?>">
 									<!-- hidden form -->
 									<div class="form-group row">
-										<label class="col-sm-4 col-form-label">Nama<span style="color:red;">*</span></label>
+										<label class="col-sm-4 col-form-label">Dokter<span style="color:red;">*</span></label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" name="nama" required>
+											<select class="custom-select col-12" name="id_dokter">
+												<option selected disabled>Choose...</option>
+												<?php $no=1; $dokters = $Dokter->readAll(); while ($row = $dokters->fetch(PDO::FETCH_ASSOC)) : ?>
+													<option value="<?=$row['id_dokter']?>"><?=$row['nama']?></option>
+												<?php endwhile; ?>
+											</select>
 										</div>
 									</div>
 									<div class="form-group row">
@@ -144,27 +135,28 @@
 										</div>
 									</div>
 									<div class="form-group row">
-										<label class="col-sm-4 col-form-label">Spesialis<span style="color:red;">*</span></label>
+										<label class="col-sm-4 col-form-label">Hari<span style="color:red;">*</span></label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" name="spesialis" required>
+											<select class="custom-select col-12" name="hari">
+												<option selected disabled>Choose...</option>
+												<option value="Senin">Senin</option>
+												<option value="Selasa">Selasa</option>
+												<option value="Rabu">Rabu</option>
+												<option value="Kamis">Kamis</option>
+												<option value="Jum'at">Jum'at</option>
+											</select>
 										</div>
 									</div>
 									<div class="form-group row">
-										<label class="col-sm-4 col-form-label">Username<span style="color:red;">*</span></label>
+										<label class="col-sm-4 col-form-label">Jam Mulai<span style="color:red;">*</span></label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control" name="username" required>
+											<input type="time" class="form-control" name="jam_mulai" required>
 										</div>
 									</div>
 									<div class="form-group row">
-										<label class="col-sm-4 col-form-label">Password<span style="color:red;">*</span></label>
+										<label class="col-sm-4 col-form-label">Jam Selesai<span style="color:red;">*</span></label>
 										<div class="col-sm-8">
-											<input type="password" class="form-control" name="password" required>
-										</div>
-									</div>
-                                    <div class="form-group row">
-										<label class="col-sm-4 col-form-label">NIP<span style="color:red;">*</span></label>
-										<div class="col-sm-8">
-											<input type="number" class="form-control" name="nip" required>
+											<input type="time" class="form-control" name="jam_selesai" required>
 										</div>
 									</div>
                                 </div>

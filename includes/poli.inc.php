@@ -56,7 +56,7 @@ class Poli {
 	}
 
 	function readAll() {
-		$query = "SELECT A.id_poli, A.nama_poli, A.nama, A.nip, B.username, B.password  FROM {$this->table_poli} A LEFT JOIN {$this->table_user} B ON A.id_user=B.id_user ORDER BY id_poli ASC";
+		$query = "SELECT A.id_poli, A.id_user, A.nama_poli, A.nama, A.nip, B.username, B.password  FROM {$this->table_poli} A LEFT JOIN {$this->table_user} B ON A.id_user=B.id_user ORDER BY id_poli ASC";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
 

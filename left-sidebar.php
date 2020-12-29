@@ -39,6 +39,11 @@
 								</a>
 							</li>
 							<li>
+								<a href="jadwal-dokter.php" class="dropdown-toggle no-arrow">
+									<span class="micon dw dw-wall-clock2"></span><span class="mtext">Jadwal Dokter</span>
+								</a>
+							</li>
+							<li>
 								<a href="poli.php" class="dropdown-toggle no-arrow">
 									<span class="micon dw dw-hospital"></span><span class="mtext">Poli</span>
 								</a>

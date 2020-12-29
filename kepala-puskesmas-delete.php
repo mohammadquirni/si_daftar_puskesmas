@@ -1,7 +1,7 @@
 <?php
 
     include("config.php");
-    include_once('includes/pasien.inc.php');
+    include_once('includes/kepala-puskesmas.inc.php');
     include_once('includes/user.inc.php');
 
     session_start();
@@ -11,16 +11,16 @@
     $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
     $id_user = isset($_GET['id_user']) ? $_GET['id_user'] : die('ERROR: missing ID USER.');
 
-    $Pasien = new Pasien($db);
-    $Pasien->id_pasien = $id;
+    $Kepala_Puskesmas = new Kepala_Puskesmas($db);
+    $Kepala_Puskesmas->id_kepala_puskesmas = $id;
 
     $User = new User($db);
     $User->id_user = $id_user;
 
-    if($Pasien->delete() && $User->delete()){
-        echo "<script>location.href='pasien.php';</script>";
+    if($Kepala_Puskesmas->delete() && $User->delete()){
+        echo "<script>location.href='kepala-puskesmas.php';</script>";
     } else{
-        echo "<script>alert('Gagal Hapus Data');location.href='pasien.php';</script>";
+        echo "<script>alert('Gagal Hapus Data');location.href='kepala-puskesmas.php';</script>";
     }
 
 ?>

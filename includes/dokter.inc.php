@@ -59,7 +59,7 @@ class Dokter {
 	}
 
 	function readAll() {
-		$query = "SELECT A.id_dokter, A.nama, A.nip, A.spesialis, B.nama_poli, C.username, C.password  FROM {$this->table_dokter} A LEFT JOIN {$this->table_poli} B ON A.id_poli=B.id_poli LEFT JOIN {$this->table_user} C ON A.id_user=C.id_user ORDER BY id_dokter ASC";
+		$query = "SELECT A.id_dokter, A.id_user, A.nama, A.nip, A.spesialis, B.nama_poli, C.username, C.password  FROM {$this->table_dokter} A LEFT JOIN {$this->table_poli} B ON A.id_poli=B.id_poli LEFT JOIN {$this->table_user} C ON A.id_user=C.id_user ORDER BY id_dokter ASC";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
 
