@@ -12,7 +12,7 @@
 		$login->username = $_POST['username'];
 		$login->password = $_POST['password'];
 		if ($login->login()) {
-			echo "<script>location.href='dashboard.php'</script>";
+			echo "<script>location.href='home.php'</script>";
 		} else {
 			echo "<script>alert('Username / Password tidak sesuai!');</script>";
 		}

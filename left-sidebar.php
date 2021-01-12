@@ -1,6 +1,6 @@
     <div class="left-side-bar">
 		<div class="brand-logo">
-			<a href="dashboard.php">
+			<a href="home.php">
 				<img src="vendors/images/deskapp-logo.svg" alt="" class="dark-logo">
 				<img src="vendors/images/deskapp-logo-white.svg" alt="" class="light-logo">
 			</a>
@@ -13,7 +13,7 @@
 				<ul id="accordion-menu">
 					<li class="dropdown">
 						<li>
-							<a href="dashboard.php" class="dropdown-toggle no-arrow">
+							<a href="home.php" class="dropdown-toggle no-arrow">
 								<span class="micon dw dw-house-1"></span><span class="mtext">Beranda</span>
 							</a>
 						</li>

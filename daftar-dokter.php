@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-  <?php
-    include("config.php");
-    include_once('includes/pasien.inc.php');
-    include_once('includes/poli.inc.php');
-    include_once('includes/jadwal-periksa.inc.php');
+<?php
+  include("config.php");
+	include_once('includes/dokter.inc.php');
+	include_once('includes/user.inc.php');
+	include_once('includes/poli.inc.php');
 
-    $config = new Config(); $db = $config->getConnection();
+  $config = new Config(); $db = $config->getConnection();
 
-    $Pasien = new Pasien($db);
-    $Poli = new Poli($db);
-    $Jadwal_Periksa = new Jadwal_Periksa($db);
-  ?>
+	$Dokter = new Dokter($db);
+	$User = new User($db);
+	$Poli = new Poli($db);
+?>
 
   <head>
     <title>Beranda - SI Pendaftaran Pasien</title>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="manifest.json">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/css/style-index.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -28,41 +26,6 @@
     
   </head>
   <body data-spy="scroll" data-target=".navbar" data-offset="50">
-
-  <?php
-		if($_POST){
-      // post jadwal periksa
-      $Pasien->id_pasien = $_POST["id_pasien"];
-      $Pasien->nik = $_POST["nik"];
-      $Pasien->nama = $_POST["nama"];
-      $Pasien->tempat_tanggal_lahir = $_POST["tempat_tanggal_lahir"];
-      $Pasien->jenis_kelamin = $_POST["jenis_kelamin"];
-      $Pasien->alamat = $_POST["alamat"];
-      $Pasien->no_telpon = $_POST["no_telpon"];
-      $Pasien->gol_darah = $_POST["gol_darah"];
-      $Pasien->kepala_keluarga = $_POST["kepala_keluarga"];
-
-      // post jadwal periksa
-			$Jadwal_Periksa->id_jadwal_periksa = $_POST["id_jadwal_periksa"];
-      $Jadwal_Periksa->id_pasien = $_POST["id_pasien"];
-      $Jadwal_Periksa->nomor_antrian = $_POST["nomor_antrian"];
-      $Jadwal_Periksa->tgl_periksa = $_POST["tgl_periksa"];
-			$Jadwal_Periksa->id_poli = $_POST["id_poli"];
-      $Jadwal_Periksa->gejala_penyakit = $_POST["gejala_penyakit"];
-      $Jadwal_Periksa->berat_badan = $_POST["berat_badan"];
-      $Jadwal_Periksa->tinggi_badan = $_POST["tinggi_badan"];
-
-			if($Pasien->insert() && $Jadwal_Periksa->insert()){
-				echo '<script language="javascript">';
-        echo 'alert("Data Berhasil Terkirim")';
-        echo '</script>';
-			} else { 
-				echo '<script language="javascript">';
-        echo 'alert("Data Gagal Terkirim")';
-        echo '</script>';
-			}
-		}
-	?>
 
     <nav class="navbar navbar-expand-sm navbar-dark fixed-top" style="background-color:#3B90FA; ">
       <a class="navbar-brand" href="index.php">Sistem Pendaftaran Pasien</a>
@@ -116,51 +79,47 @@
           <a>Jl. Lentora KM. 13 Kec. Palu Utara Telp (0451) 492282 - Sulawesi Tengah</a>
         </div>
         <div class="col-3 text-left">
-          <img class="img-fluid" src="assets/img/puskesmas.png" alt="Provinsi Sulawesi Tengah" width="120" height="120"> 
+           <img class="img-fluid" src="assets/img/puskesmas.png" alt="Provinsi Sulawesi Tengah" width="120" height="120"> 
         </div>
       </div>
     </div>
 
-    <div class="container border" style="padding-top:20px; padding-bottom:60px;" >
-      <h2><center>Pendaftaran Pasien Puskesmas</center></h2>
+  <div class="main-container">
+    <div class="container border" style="background-color:#FFFFFF; padding-top:20px; padding-bottom:100px;">
+      <h2><center>Daftar Jadwal Dokter</center></h2>
       <br/>
-      <p>Perhatikan dan baca petunjuk pendaftaran pasien dengan teliti sebelum melakukan pendaftaran : </p>
-      <table class="table table-striped table-responsive table-sm border" >
-        <tr>
-          <td>1. </td>
-          <td>Pendaftaran dilakukan melalui form yang tersedia dalam website.</td>
-        </tr>
-        <tr>
-          <td>2. </td>
-          <td>Bagi pasien yang telah mendaftar akan menerima nomor antrian untuk di bawa pada petugas loket pendaftaran di Puskesmas.</td>
-        </tr>
-        <tr>
-          <td>3. </td>
-          <td>Bagi pasien yang telah mendaftar tetapi terlambat atau tidak datang ke Puskesmas dengan sesuai nomor antrian maka nomornya akan dipindahkan petugas pada urutan nomor terakhir.</td>
-        </tr>
-      </table>
+        <div class="table-responsive">
+          <table class="table table-bordered table-sm table-hover table-striped" style="text-align: center;">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>NIP</th>
+                <th>Nama Dokter</th>
+                <th>Spesialis</th>
+              </tr>
+            </thead>
+            <tbody id="myTable">
+              <?php $no=1; $dokters = $Dokter->readAll(); while ($row = $dokters->fetch(PDO::FETCH_ASSOC)) : ?>
+              <tr>
+                <td><?=$no?></td>
+								<td><?=$row['nip']?></td>
+								<td><?=$row['nama']?></td>
+                <td><?=$row['spesialis']?></td>
+              </tr>
+              <?php 
+                $no++;
+                endwhile; 
+              ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
 
+    
     <div class="container-fluid p-3 text-center fixed-bottom" style="background-color:#3B90FA; color:#FFFFFF;">
       <h6>&copy; 165610079 - Mohammad Quirni</h6>
     </div>
-
-    <?php include("modal/daftar_periksa_pasien_baru.php"); ?>
-
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-          navigator.serviceWorker.register('service-worker.js')
-            .then(reg => {
-              console.log('Service worker registered!', reg);
-            })
-            .catch(err => {
-              console.log('Service worker registration failed: ', err);
-            });
-        });
-      }
-    </script>
-
-  </body>
+    
+</body>
 </html>
-

@@ -41,6 +41,7 @@
 			$Jadwal_Periksa->id_poli = $_POST["id_poli"];
       $Jadwal_Periksa->gejala_penyakit = $_POST["gejala_penyakit"];
       $Jadwal_Periksa->berat_badan = $_POST["berat_badan"];
+      $Jadwal_Periksa->tinggi_badan = $_POST["tinggi_badan"];
 
 			if($Jadwal_Periksa->insert()){
 				echo '<script language="javascript">';
@@ -94,6 +95,10 @@
               <div class="form-group col-md-12">
                 <label>Berat Badan</label>
                 <input type="number" class="form-control bg-light" name="berat_badan">
+              </div>
+              <div class="form-group col-md-12">
+                <label>Tinggi Badan</label>
+                <input type="number" class="form-control bg-light" name="tinggi_badan">
               </div>
               <div class="form-group col-md-12">
                 <div class="row">

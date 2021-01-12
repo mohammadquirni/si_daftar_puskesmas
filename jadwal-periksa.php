@@ -37,7 +37,7 @@
 				<!-- Simple Datatable start -->
 				<div class="card-box mb-30">
 					<div class="pd-20">
-						<h4 class="text-blue h4"><i class="dw dw-stethoscope"></i> Data Jadwal Dokter</h4>
+						<h4 class="text-blue h4"><i class="dw dw-stethoscope"></i> Data Jadwal Periksa</h4>
 						<!-- <p class="mb-0">you can find more options <a class="text-primary" href="https://datatables.net/" target="_blank">Click Here</a></p> -->
 					</div>
 					<div class="pb-20">
@@ -50,6 +50,7 @@
                                     <th>Tgl Periksa</th>
 									<th>Gejala</th>
 									<th>Berat Badan</th>
+									<th>Tinggi Badan</th>
 									<th>Nomor Antrian</th>
 									<th>Action</th>
 								</tr>
@@ -63,6 +64,7 @@
                                     <td><?=$row['tgl_periksa']?></td>
 									<td><?=$row['gejala_penyakit']?></td>
 									<td><?=$row['berat_badan']?></td>
+									<td><?=$row['tinggi_badan']?></td>
 									<td><?=$row['nomor_antrian']?></td>
 									<td>
 										<!-- <a class="dropdown-item link-action" href="jadwal-periksa-detail.php?id=<?php echo $row['id_jadwal_periksa']; ?>"><i class="dw dw-eye"></i> Detail</a> |  -->

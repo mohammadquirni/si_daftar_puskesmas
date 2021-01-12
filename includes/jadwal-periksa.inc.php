@@ -5,14 +5,13 @@ class Jadwal_Periksa {
 	private $table_pasien = 'pasien';
 	private $table_poli = 'poli';
 
-	public $today = 2020-12-29;
-
 	public $id_jadwal_periksa;
     public $id_pasien;
     public $id_poli;
     public $tgl_periksa;
     public $gejala_penyakit;
 	public $berat_badan;
+	public $tinggi_badan;
 	public $nomor_antrian;
 
 	public function __construct($db) {
@@ -20,7 +19,7 @@ class Jadwal_Periksa {
 	}
 
 	function insert() {
-		$query = "INSERT INTO {$this->table_jadwal_periksa} VALUES(?, ?, ?, ?, ?, ?, ?)";
+		$query = "INSERT INTO {$this->table_jadwal_periksa} VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
 		$stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->id_jadwal_periksa);
@@ -29,7 +28,8 @@ class Jadwal_Periksa {
         $stmt->bindParam(4, $this->tgl_periksa);
         $stmt->bindParam(5, $this->gejala_penyakit);
 		$stmt->bindParam(6, $this->berat_badan);
-		$stmt->bindParam(7, $this->nomor_antrian);
+		$stmt->bindParam(7, $this->tinggi_badan);
+		$stmt->bindParam(8, $this->nomor_antrian);
 
 		if ($stmt->execute()) {
 			return true;
@@ -52,7 +52,7 @@ class Jadwal_Periksa {
 	}
 
 	function getNewAntrian() {
-		$query = "SELECT MAX(nomor_antrian) AS code FROM {$this->table_jadwal_periksa}";
+		$query = "SELECT MAX(nomor_antrian) AS code FROM {$this->table_jadwal_periksa} WHERE tgl_periksa=CURDATE();";
 		$stmt = $this->conn->prepare($query);
 		$stmt->execute();
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -76,7 +76,7 @@ class Jadwal_Periksa {
 	}
 
 	function readAll() {
-		$query = "SELECT A.id_jadwal_periksa, B.nama AS nama_pasien, C.nama_poli, A.tgl_periksa, A.gejala_penyakit, A.berat_badan, A.nomor_antrian FROM {$this->table_jadwal_periksa} A LEFT JOIN {$this->table_pasien} B ON A.id_pasien=B.id_pasien LEFT JOIN {$this->table_poli} C ON A.id_poli= C.id_poli ORDER BY id_jadwal_periksa ASC";
+		$query = "SELECT A.id_jadwal_periksa, B.nama AS nama_pasien, C.nama_poli, A.tgl_periksa, A.gejala_penyakit, A.berat_badan, A.tinggi_badan, A.nomor_antrian FROM {$this->table_jadwal_periksa} A LEFT JOIN {$this->table_pasien} B ON A.id_pasien=B.id_pasien LEFT JOIN {$this->table_poli} C ON A.id_poli= C.id_poli ORDER BY id_jadwal_periksa ASC";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
 
@@ -93,7 +93,8 @@ class Jadwal_Periksa {
 		$this->id_jadwal_periksa = $row['id_jadwal_periksa'];
         $this->tgl_periksa = $row['tgl_periksa'];
         $this->gejala_penyakit = $row['gejala_penyakit'];
-        $this->berat_badan = $row['berat_badan'];
+		$this->berat_badan = $row['berat_badan'];
+		$this->tinggi_badan = $row['tinggi_badan'];
 	}
 
 	function update() {
@@ -102,7 +103,8 @@ class Jadwal_Periksa {
                 id_jadwal_periksa = :id_jadwal_periksa,
                 tgl_periksa = :tgl_periksa,
                 gejala_penyakit = :gejala_penyakit,
-				berat_badan = :berat_badan
+				berat_badan = :berat_badan,
+				tinggi_badan = :tinggi_badan
 			WHERE
 				id_jadwal_periksa = :id";
         $stmt = $this->conn->prepare($query);
@@ -110,7 +112,8 @@ class Jadwal_Periksa {
 		$stmt->bindParam(':id_jadwal_periksa', $this->id_jadwal_periksa);
         $stmt->bindParam(':tgl_periksa', $this->tgl_periksa);
         $stmt->bindParam(':gejala_penyakit', $this->gejala_penyakit);
-        $stmt->bindParam(':berat_badan', $this->berat_badan);
+		$stmt->bindParam(':berat_badan', $this->berat_badan);
+		$stmt->bindParam(':tinggi_badan', $this->tinggi_badan);
         $stmt->bindParam(':id', $this->id_jadwal_periksa);
 
 		if ($stmt->execute()) {
