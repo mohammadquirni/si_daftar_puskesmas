@@ -27,7 +27,7 @@
 						<?php elseif ($_SESSION['hak_akses'] == 'poli'): ?>
 							<!-- Poli -->
 							<li>
-								<a href="jadwal-poli.php" class="dropdown-toggle no-arrow">
+								<a href="jadwal-poli.php?id=<?php echo $_SESSION['id_poli']; ?>" class="dropdown-toggle no-arrow">
 									<span class="micon dw dw-wall-clock1"></span><span class="mtext">Jadwal Periksa Poli</span>
 								</a>
 							</li>

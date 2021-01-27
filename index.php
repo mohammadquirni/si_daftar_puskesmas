@@ -100,6 +100,9 @@
           <li class="nav-item">
             <a class="nav-link" href="view/view_output/tentang.php">Tentang Kami</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.php">Login Admin</a>
+          </li>
         </ul>
       </div>
     </nav>

@@ -44,33 +44,31 @@
 						<table class="data-table table stripe hover nowrap">
 							<thead>
 								<tr class="text-center">
-									<th>ID</th>
+									<th>Tgl Periksa</th>
 									<th>Pasien</th>
 									<th>Poli</th>
-                                    <th>Tgl Periksa</th>
 									<th>Gejala</th>
 									<th>Berat Badan</th>
 									<th>Tinggi Badan</th>
 									<th>Nomor Antrian</th>
-									<th>Action</th>
+									<!-- <th>Action</th> -->
 								</tr>
 							</thead>
 							<tbody>
                                 <?php $no=1; $jadwal_Periksas = $Jadwal_Periksa->readAll(); while ($row = $jadwal_Periksas->fetch(PDO::FETCH_ASSOC)) : ?>
 								<tr class="text-center">
-									<td><?=$row['id_jadwal_periksa']?></td>
+									<td><?=$row['tgl_periksa']?></td>
                                     <td><?=$row['nama_pasien']?></td>
                                     <td><?=$row['nama_poli']?></td>
-                                    <td><?=$row['tgl_periksa']?></td>
 									<td><?=$row['gejala_penyakit']?></td>
 									<td><?=$row['berat_badan']?></td>
 									<td><?=$row['tinggi_badan']?></td>
 									<td><?=$row['nomor_antrian']?></td>
-									<td>
-										<!-- <a class="dropdown-item link-action" href="jadwal-periksa-detail.php?id=<?php echo $row['id_jadwal_periksa']; ?>"><i class="dw dw-eye"></i> Detail</a> |  -->
-										<!-- <a class="dropdown-item link-action" href="jadwal-periksa-update.php?id=<?php echo $row['id_jadwal_periksa']; ?>"><i class="dw dw-edit-1"></i> Edit</a> |  -->
+									<!-- <td>
+										<a class="dropdown-item link-action" href="jadwal-periksa-detail.php?id=<?php echo $row['id_jadwal_periksa']; ?>"><i class="dw dw-eye"></i> Detail</a> | 
+										<a class="dropdown-item link-action" href="jadwal-periksa-update.php?id=<?php echo $row['id_jadwal_periksa']; ?>"><i class="dw dw-edit-1"></i> Edit</a> | 
 										<a class="dropdown-item link-action" href="jadwal-periksa-delete.php?id=<?php echo $row['id_jadwal_periksa']; ?>"><i class="dw dw-delete-3"></i> Delete</a>
-									</td>
+									</td> -->
 								</tr>
                                 <?php endwhile; ?>
 							</tbody>

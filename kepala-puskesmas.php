@@ -73,7 +73,6 @@
 						<table class="data-table table stripe hover nowrap">
 							<thead>
 								<tr class="text-center">
-									<th>ID</th>
                                     <th>NIP</th>
 									<th>Nama</th>
                                     <th>Username</th>
@@ -84,7 +83,6 @@
 							<tbody>
                                 <?php $no=1; $kepala_puskesmass = $Kepala_Puskesmas->readAll(); while ($row = $kepala_puskesmass->fetch(PDO::FETCH_ASSOC)) : ?>
 								<tr class="text-center">
-									<td><?=$row['id_kepala_puskesmas']?></td>
                                     <td><?=$row['nip']?></td>
                                     <td><?=$row['nama']?></td>
                                     <td><?=$row['username']?></td>

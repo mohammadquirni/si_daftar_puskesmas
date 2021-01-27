@@ -36,7 +36,6 @@
 			// post jdawal dokter
 			$Jadwal_Dokter->id_jadwal_dokter = $_POST["id_jadwal_dokter"];
 			$Jadwal_Dokter->id_dokter = $_POST["id_dokter"];
-			$Jadwal_Dokter->id_poli = $_POST["id_poli"];
 			$Jadwal_Dokter->hari = $_POST["hari"];
 			$Jadwal_Dokter->jam_mulai = $_POST["jam_mulai"];
 			$Jadwal_Dokter->jam_selesai = $_POST["jam_selesai"];
@@ -119,17 +118,6 @@
 												<option selected disabled>Choose...</option>
 												<?php $no=1; $dokters = $Dokter->readAll(); while ($row = $dokters->fetch(PDO::FETCH_ASSOC)) : ?>
 													<option value="<?=$row['id_dokter']?>"><?=$row['nama']?></option>
-												<?php endwhile; ?>
-											</select>
-										</div>
-									</div>
-									<div class="form-group row">
-										<label class="col-sm-4 col-form-label">Poli<span style="color:red;">*</span></label>
-										<div class="col-sm-8">
-											<select class="custom-select col-12" name="id_poli">
-												<option selected disabled>Choose...</option>
-												<?php $no=1; $polis = $Poli->readAll(); while ($row = $polis->fetch(PDO::FETCH_ASSOC)) : ?>
-													<option value="<?=$row['id_poli']?>"><?=$row['nama_poli']?></option>
 												<?php endwhile; ?>
 											</select>
 										</div>

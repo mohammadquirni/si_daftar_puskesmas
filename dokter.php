@@ -77,7 +77,6 @@
 						<table class="data-table table stripe hover nowrap">
 							<thead>
 								<tr class="text-center">
-									<th>ID Dokter</th>
 									<th>NIP</th>
 									<th>Nama</th>
                                     <th>Spesialis</th>
@@ -90,7 +89,6 @@
 							<tbody>
                                 <?php $no=1; $dokters = $Dokter->readAll(); while ($row = $dokters->fetch(PDO::FETCH_ASSOC)) : ?>
 								<tr class="text-center">
-									<td><?=$row['id_dokter']?></td>
 									<td><?=$row['nip']?></td>
 									<td><?=$row['nama']?></td>
                                     <td><?=$row['spesialis']?></td>

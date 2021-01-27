@@ -11,7 +11,12 @@
 	if (!isset($_SESSION['id_user'])) echo "<script>location.href='login.php'</script>";
     $config = new Config(); $db = $config->getConnection();
 
+	$id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
+
 	$Jadwal_Poli = new Jadwal_Poli($db);
+	$Jadwal_Poli->id_poli = $id;
+	// $Jadwal_Poli->readOne();
+
 	$Pasien = new Pasien($db);
 	$Poli = new Poli($db);
 

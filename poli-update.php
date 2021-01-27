@@ -3,7 +3,7 @@
 
 <?php
     include("config.php");
-	include_once('includes/kepala-puskesmas.inc.php');
+	include_once('includes/poli.inc.php');
 	include_once("includes/user.inc.php");
 
 	session_start();
@@ -13,9 +13,9 @@
 	$id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: missing ID.');
 	$id_user = isset($_GET['id_user']) ? $_GET['id_user'] : die('ERROR: missing ID USER.');
 
-	$Kepala_Puskesmas = new Kepala_Puskesmas($db);
-	$Kepala_Puskesmas->id_kepala_puskesmas = $id;
-	$Kepala_Puskesmas->readOne();
+	$Poli = new Poli($db);
+	$Poli->id_poli = $id;
+	$Poli->readOne();
 
 	$User = new User($db);
 	$User->id_user = $id_user;
@@ -41,10 +41,11 @@
 	<?php
 		if($_POST){
 			// post kepala puskesmas
-			$Kepala_Puskesmas->id_kepala_puskesmas = $_POST["id_kepala_puskesmas"];
-			$Kepala_Puskesmas->id_user = $_POST["id_user"];
-			$Kepala_Puskesmas->nama = $_POST["nama"];
-            $Kepala_Puskesmas->nip = $_POST["nip"];
+			$Poli->id_poli = $_POST["id_poli"];
+			$Poli->id_user = $_POST["id_user"];
+			$Poli->nama_poli = $_POST["nama_poli"];
+			$Poli->nama = $_POST["nama"];
+            $Poli->nip = $_POST["nip"];
 
 			// post user
 			$User->id_user = $_POST["id_user"];
@@ -52,11 +53,11 @@
 			$User->password = $_POST["password"];
 			$User->hak_akses = $_POST["hak_akses"];
 
-			if($User->update() && $Kepala_Puskesmas->update()){
+			if($User->update() && $Poli->update()){
 				echo '<script language="javascript">';
                 echo 'alert("Data Berhasil Dikirim")';
                 echo '</script>';
-				echo "<script>location.href='kepala-puskesmas.php'</script>";
+				echo "<script>location.href='poli.php'</script>";
 			} else { 
 				echo '<script language="javascript">';
                 echo 'alert("Data Gagal Terkirim")';
@@ -76,7 +77,7 @@
                     </div>
 					<form method="POST" enctype="multipart/form-data">
 						<!-- hidden -->
-						<input type="hidden" name="id_kepala_puskesmas" value="<?php echo $Kepala_Puskesmas->id_kepala_puskesmas; ?>">
+						<input type="hidden" name="id_poli" value="<?php echo $Poli->id_poli; ?>">
 						<input type="hidden" name="id_user" value="<?php echo $User->id_user; ?>">
 						<input type="hidden" name="hak_akses" value="<?php echo $User->hak_akses; ?>">
 						<div style="padding-right:15px;">
@@ -88,11 +89,15 @@
 						<div class="pd-20 mb-30">
 							<div class="form-group">
 								<label>NIP</label>
-								<input type="number" class="form-control" name="nip" value="<?php echo $Kepala_Puskesmas->nip; ?>">
+								<input type="number" class="form-control" name="nip" value="<?php echo $Poli->nip; ?>">
+							</div>
+							<div class="form-group">
+								<label>Nama Poli</label>
+								<input type="text" class="form-control" name="nama_poli" value="<?php echo $Poli->nama_poli; ?>">
 							</div>
 							<div class="form-group">
 								<label>Nama</label>
-								<input type="text" class="form-control" name="nama" value="<?php echo $Kepala_Puskesmas->nama; ?>">
+								<input type="text" class="form-control" name="nama" value="<?php echo $Poli->nama; ?>">
 							</div>
 							<div class="form-group">
 								<label>Username</label>

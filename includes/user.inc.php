@@ -63,7 +63,8 @@ class User {
 
 		$this->id_user = $row['id_user'];
         $this->username = $row['username'];
-        $this->password = $row['password'];
+		$this->password = $row['password'];
+		$this->hak_akses = $row['hak_akses'];
 	}
 
 	function update() {
@@ -71,14 +72,16 @@ class User {
 			SET
                 id_user = :id_user,
                 username = :username,
-				password = :password
+				password = :password,
+				hak_akses = :hak_akses
 			WHERE
 				id_user = :id_user";
         $stmt = $this->conn->prepare($query);
 
 		$stmt->bindParam(':id_user', $this->id_user);
         $stmt->bindParam(':username', $this->username);
-        $stmt->bindParam(':password', $this->password);
+		$stmt->bindParam(':password', $this->password);
+		$stmt->bindParam(':hak_akses', $this->hak_akses);
         $stmt->bindParam(':id_user', $this->id_user);
 
 		if ($stmt->execute()) {

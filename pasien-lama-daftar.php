@@ -73,11 +73,11 @@
 							<input type="hidden" name="id_pasien" value="<?php echo ($_SESSION['id_pasien']); ?>">
               <div class="form-group col-md-12">
                 <label>No Antrian</label>
-                <input type="text" class="form-control bg-light" name="nomor_antrian" value="<?php echo $Jadwal_Periksa->getNewAntrian(); ?>">
+                <input type="text" class="form-control bg-light" name="nomor_antrian" value="<?php echo $Jadwal_Periksa->getNewAntrian(); ?>" readonly>
               </div>
               <div class="form-group col-md-12">
                 <label>Tanggal Periksa</label>
-                <input type="text" class="form-control bg-light" name="tgl_periksa" value="<?php echo date("Y-m-d"); ?>">
+                <input type="text" class="form-control bg-light" name="tgl_periksa" value="<?php echo date("Y-m-d"); ?>" readonly>
               </div>
               <div class="form-group col-md-12">
                 <label>Poli</label>

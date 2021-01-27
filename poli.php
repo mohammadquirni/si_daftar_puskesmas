@@ -74,10 +74,9 @@
 						<table class="data-table table stripe hover nowrap">
 							<thead>
 								<tr class="text-center">
-									<th>ID Poli</th>
+									<th>NIP</th>
 									<th>Nama Poli</th>
 									<th>Nama Petugas</th>
-                                    <th>NIP</th>
                                     <th>Username</th>
                                     <th>Password</th>
 									<th>Action</th>
@@ -86,10 +85,9 @@
 							<tbody>
                                 <?php $no=1; $polis = $Poli->readAll(); while ($row = $polis->fetch(PDO::FETCH_ASSOC)) : ?>
 								<tr class="text-center">
-									<td><?=$row['id_poli']?></td>
+									<td><?=$row['nip']?></td>
 									<td><?=$row['nama_poli']?></td>
                                     <td><?=$row['nama']?></td>
-                                    <td><?=$row['nip']?></td>
                                     <td><?=$row['username']?></td>
                                     <td><?=$row['password']?></td>
 									<td>
