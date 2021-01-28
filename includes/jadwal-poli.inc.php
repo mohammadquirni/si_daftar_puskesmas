@@ -61,7 +61,7 @@ class Jadwal_Poli {
 	}
 
 	function readAll() {
-		$query = "SELECT A.id_jadwal_periksa, B.nama AS nama_pasien, C.nama_poli, A.tgl_periksa, A.gejala_penyakit, A.berat_badan, A.nomor_antrian FROM {$this->table_jadwal_periksa} A LEFT JOIN {$this->table_pasien} B ON A.id_pasien=B.id_pasien LEFT JOIN {$this->table_poli} C ON A.id_poli= C.id_poli WHERE A.id_poli=:id_poli ORDER BY id_jadwal_periksa ASC";
+		$query = "SELECT A.id_jadwal_periksa, B.nama AS nama_pasien, C.nama_poli, A.tgl_periksa, A.gejala_penyakit, A.berat_badan, A.nomor_antrian FROM {$this->table_jadwal_periksa} A LEFT JOIN {$this->table_pasien} B ON A.id_pasien=B.id_pasien LEFT JOIN {$this->table_poli} C ON A.id_poli= C.id_poli WHERE A.id_poli=:id_poli && A.tgl_periksa=CURDATE(); ORDER BY id_jadwal_periksa ASC";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->bindParam(':id_poli', $this->id_poli);
 		$stmt->execute();

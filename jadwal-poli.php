@@ -69,14 +69,17 @@
                                     <td><?=$row['tgl_periksa']?></td>
 									<td><?=$row['gejala_penyakit']?></td>
 									<td><?=$row['berat_badan']?></td>
-									<td><?=$row['nomor_antrian']?></td>
+									<td><?=$no?></td>
 									<!-- <td> -->
 										<!-- <a class="dropdown-item link-action" href="jadwal-periksa-detail.php?id=<?php echo $row['id_jadwal_periksa']; ?>"><i class="dw dw-eye"></i> Detail</a> |  -->
 										<!-- <a class="dropdown-item link-action" href="jadwal-periksa-update.php?id=<?php echo $row['id_jadwal_periksa']; ?>"><i class="dw dw-edit-1"></i> Edit</a> |  -->
 										<!-- <a class="dropdown-item link-action" href="jadwal-periksa-delete.php?id=<?php echo $row['id_jadwal_periksa']; ?>"><i class="dw dw-delete-3"></i> Delete</a> -->
 									<!-- </td> -->
 								</tr>
-                                <?php endwhile; ?>
+								<?php 
+									$no++;
+									endwhile; 
+								?>
 							</tbody>
 						</table>
 					</div>
