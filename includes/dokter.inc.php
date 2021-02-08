@@ -74,6 +74,8 @@ class Dokter {
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		$this->id_dokter = $row['id_dokter'];
+		$this->id_poli = $row['id_poli'];
+		$this->id_user = $row['id_user'];
         $this->nama = $row['nama'];
         $this->nip = $row['nip'];
         $this->spesialis = $row['spesialis'];
@@ -83,6 +85,8 @@ class Dokter {
 		$query = "UPDATE {$this->table_dokter}
 			SET
                 id_dokter = :id_dokter,
+				id_poli = :id_poli,
+				id_user = :id_user,
                 nama = :nama,
                 nip = :nip,
 				spesialis = :spesialis
@@ -91,6 +95,8 @@ class Dokter {
         $stmt = $this->conn->prepare($query);
 
 		$stmt->bindParam(':id_dokter', $this->id_dokter);
+		$stmt->bindParam(':id_poli', $this->id_poli);
+		$stmt->bindParam(':id_user', $this->id_user);
         $stmt->bindParam(':nama', $this->nama);
         $stmt->bindParam(':nip', $this->nip);
         $stmt->bindParam(':spesialis', $this->spesialis);

@@ -74,6 +74,7 @@ class Jadwal_Dokter {
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		$this->id_jadwal_dokter = $row['id_jadwal_dokter'];
+		$this->id_dokter = $row['id_dokter'];
         $this->hari = $row['hari'];
         $this->jam_mulai = $row['jam_mulai'];
         $this->jam_selesai = $row['jam_selesai'];
@@ -83,6 +84,7 @@ class Jadwal_Dokter {
 		$query = "UPDATE {$this->table_jadwal_dokter}
 			SET
                 id_jadwal_dokter = :id_jadwal_dokter,
+				id_dokter = :id_dokter,
                 hari = :hari,
                 jam_mulai = :jam_mulai,
 				jam_selesai = :jam_selesai
@@ -91,6 +93,7 @@ class Jadwal_Dokter {
         $stmt = $this->conn->prepare($query);
 
 		$stmt->bindParam(':id_jadwal_dokter', $this->id_jadwal_dokter);
+		$stmt->bindParam(':id_dokter', $this->id_dokter);
         $stmt->bindParam(':hari', $this->hari);
         $stmt->bindParam(':jam_mulai', $this->jam_mulai);
         $stmt->bindParam(':jam_selesai', $this->jam_selesai);

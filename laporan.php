@@ -1,8 +1,12 @@
 <?php
 	include("config.php");
+	include_once("includes/laporan.inc.php");
+
 	session_start();
 	if (!isset($_SESSION['id_user'])) echo "<script>location.href='login.php'</script>";
 	$config = new Config(); $db = $config->getConnection();
+
+	$Laporan = new Laporan($db);
 ?>
 
 <!-- header -->
@@ -30,12 +34,6 @@
 							<div id="piechart"></div>
 						</div>
 					</div>
-					<!-- <div class="col-md-6 mb-30">
-						<div class="pd-20 card-box height-100-p">
-							<h4 class="h4 text-blue">Radial Bar Chart</h4>
-							
-						</div>
-					</div> -->
 				</div>
 			</div>
 			<!-- footer -->
@@ -57,19 +55,29 @@
 
         // Draw the chart and set the chart values
         function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-        ['Task', 'Hours per Day'],
-        ['Poli Umum', 83],
-        ['Poli Ibu dan Anak', 46],
-        ['Poli Gigi', 40]
-        ]);
+			<?php $no=1; $laporans = $Laporan->jumlahAll(); while ($row = $laporans->fetch(PDO::FETCH_ASSOC)) : ?>
+				<?php if($row['id_poli'] == '1'): ?>
+					var umum = <?=$row['jumlah']?>;
+				<?php elseif($row['id_poli'] == '2'): ?>
+					var ibuanak = <?=$row['jumlah']?>;
+				<?php elseif($row['id_poli'] == '3'): ?>
+					var gigi = <?=$row['jumlah']?>;
+				<?php endif; ?>
+            <?php endwhile; ?>
 
-        // Optional; add a title and set the width and height of the chart
-        var options = {'title':'Jumlah Rata-Rata Perbulan'};
+			var data = google.visualization.arrayToDataTable([
+			['Laporan', 'Perpoli'],
+			['Poli Umum', umum],
+			['Poli Ibu dan Anak', ibuanak],
+			['Poli Gigi', gigi]
+			]);
 
-        // Display the chart inside the <div> element with id="piechart"
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-        chart.draw(data, options);
+			// Optional; add a title and set the width and height of the chart
+			var options = {'title':'Jumlah Pasien Rata-Rata Perpoli'};
+
+			// Display the chart inside the <div> element with id="piechart"
+			var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+			chart.draw(data, options);
         }
     </script>
 
