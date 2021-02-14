@@ -49,11 +49,11 @@
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label>NIK</label>
-                <input type="text" class="form-control bg-light" name="nik" placeholder="Masukkan NIK">
+                <input type="password" class="form-control bg-light" name="nik" placeholder="Masukkan NIK">
               </div>
               <div class="form-group col-md-12">
                 <label>Nama</label>
-                <input type="text" class="form-control bg-light" name="nama" placeholder="Masukkan Nama">
+                <input type="password" class="form-control bg-light" name="nama" placeholder="Masukkan Nama">
               </div>
               <div class="form-group col-md-12">
                 <div class="row">

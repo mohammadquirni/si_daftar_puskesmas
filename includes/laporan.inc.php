@@ -21,6 +21,7 @@ class Laporan {
 		$query = "SELECT A.id_poli, B.nama_poli, COUNT(A.id_poli) AS jumlah 
 		FROM {$this->table_jadwal_periksa} A 
 		LEFT JOIN {$this->table_poli} B ON A.id_poli=B.id_poli 
+		WHERE YEAR(A.tgl_periksa) = YEAR(CURDATE())
 		GROUP BY id_poli";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
@@ -28,57 +29,16 @@ class Laporan {
 		return $stmt;
 	}
 
-	function jumlahUmum() {
+	function jumlahAllBulan() {
 		$query = "SELECT A.id_poli, B.nama_poli, COUNT(A.id_poli) AS jumlah 
 		FROM {$this->table_jadwal_periksa} A 
 		LEFT JOIN {$this->table_poli} B ON A.id_poli=B.id_poli 
-		WHERE A.id_poli='1'
+		WHERE MONTH(A.tgl_periksa) = MONTH(CURDATE())
 		GROUP BY id_poli";
 		$stmt = $this->conn->prepare( $query );
 		$stmt->execute();
 
-		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-		$this->id_poli = $row['id_poli'];
-        $this->nama_poli = $row['nama_poli'];
-        $this->jumlah = $row['jumlah'];
-
 		return $stmt;
 	}
 
-	function jumlahIbuanak() {
-		$query = "SELECT A.id_poli, B.nama_poli, COUNT(A.id_poli) AS jumlah 
-		FROM {$this->table_jadwal_periksa} A 
-		LEFT JOIN {$this->table_poli} B ON A.id_poli=B.id_poli 
-		WHERE A.id_poli='2'
-		GROUP BY id_poli";
-		$stmt = $this->conn->prepare( $query );
-		$stmt->execute();
-
-		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-		$this->id_poli = $row['id_poli'];
-        $this->nama_poli = $row['nama_poli'];
-        $this->jumlah = $row['jumlah'];
-
-		return $stmt;
-	}
-
-	function jumlahGigi() {
-		$query = "SELECT A.id_poli, B.nama_poli, COUNT(A.id_poli) AS jumlah 
-		FROM {$this->table_jadwal_periksa} A 
-		LEFT JOIN {$this->table_poli} B ON A.id_poli=B.id_poli 
-		WHERE A.id_poli='3'
-		GROUP BY id_poli";
-		$stmt = $this->conn->prepare( $query );
-		$stmt->execute();
-
-		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-		$this->id_poli = $row['id_poli'];
-        $this->nama_poli = $row['nama_poli'];
-        $this->jumlah = $row['jumlah'];
-
-		return $stmt;
-	}
 }

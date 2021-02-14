@@ -67,7 +67,12 @@
 							<!-- Kepala Puskesmas -->
 							<li>
 								<a href="laporan.php" class="dropdown-toggle no-arrow">
-									<span class="micon dw dw-analytics-3"></span><span class="mtext">Laporan</span>
+									<span class="micon dw dw-analytics-3"></span><span class="mtext">Laporan PerTahun</span>
+								</a>
+							</li>
+							<li>
+								<a href="laporan-bulan.php" class="dropdown-toggle no-arrow">
+									<span class="micon dw dw-analytics-3"></span><span class="mtext">Laporan PerBulan</span>
 								</a>
 							</li>
 						<?php endif; ?>

@@ -23,8 +23,12 @@
                 <input type="text" class="form-control bg-light" name="nik" placeholder="NIK">
               </div>
               <div class="form-group col-md-6">
-                <label>Tempat Tanggal Lahir</label>
-                <input type="text" class="form-control bg-light" name="tempat_tanggal_lahir" placeholder="Tempat Tanggal Lahir">
+                <label>Tempat Lahir</label>
+                <input type="text" class="form-control bg-light" name="tempat_lahir" placeholder="Tempat Tanggal Lahir">
+              </div>
+              <div class="form-group col-md-6">
+                <label>Tanggal Lahir</label>
+                <input type="date" class="form-control bg-light" name="tgl_lahir" placeholder="Tempat Tanggal Lahir">
               </div>
               <div class="form-group col-md-6">
                 <label>Jenis Kelamin</label>

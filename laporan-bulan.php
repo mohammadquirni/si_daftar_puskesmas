@@ -30,7 +30,7 @@
 				<div class="row">
 					<div class="col-md-12 mb-30">
 						<div class="pd-20 card-box height-100-p">
-							<h4 class="h4 text-blue">Laporan Jumlah Pasien Per Tahun</h4>
+							<h4 class="h4 text-blue">Laporan Jumlah Pasien Per Bulan</h4>
 							<div id="piechart"></div>
 						</div>
 					</div>
@@ -55,7 +55,7 @@
 
         // Draw the chart and set the chart values
         function drawChart() {
-			<?php $no=1; $laporans = $Laporan->jumlahAll(); while ($row = $laporans->fetch(PDO::FETCH_ASSOC)) : ?>
+			<?php $no=1; $laporans = $Laporan->jumlahAllBulan(); while ($row = $laporans->fetch(PDO::FETCH_ASSOC)) : ?>
 				<?php if($row['id_poli'] == '1'): ?>
 					var umum = <?=$row['jumlah']?>;
 				<?php elseif($row['id_poli'] == '2'): ?>
@@ -66,7 +66,7 @@
             <?php endwhile; ?>
 
 			var data = google.visualization.arrayToDataTable([
-			['Laporan Tahunan', 'Perpoli'],
+			['Laporan Bulanan', 'Perpoli'],
 			['Poli Umum', umum],
 			['Poli Ibu dan Anak', ibuanak],
 			['Poli Gigi', gigi]

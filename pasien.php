@@ -42,9 +42,12 @@
 								<tr class="text-center">
 									<th>NIK</th>
 									<th>Nama</th>
-                                    <th>Tempat Tanggal Lahir</th>
+                                    <th>TTL</th>
                                     <th>Jenis Kelamin</th>
+									<th>G.Darah</th>
                                     <th>Alamat</th>
+									<th>Telp</th>
+									<th>KK</th>
 									<!-- <th>Action</th> -->
 								</tr>
 							</thead>
@@ -53,9 +56,12 @@
 								<tr class="text-center">
 									<td><?=$row['nik']?></td>
                                     <td><?=$row['nama']?></td>
-                                    <td><?=$row['tempat_tanggal_lahir']?></td>
+                                    <td><?=$row['tempat_lahir']?>, <?=$row['tgl_lahir']?></td>
                                     <td><?=$row['jenis_kelamin']?></td>
+									<td><?=$row['gol_darah']?></td>
                                     <td><?=$row['alamat']?></td>
+									<td><?=$row['no_telpon']?></td>
+									<td><?=$row['kepala_keluarga']?></td>
 									<!-- <td>
 										<a class="dropdown-item link-action" href="pasien-detail.php?id=<?php echo $row['id_pasien']; ?>&&id_user=<?php echo $row['id_user']; ?>"><i class="dw dw-eye"></i> Detail</a> | 
 										<a class="dropdown-item link-action" href="pasien-update.php?id=<?php echo $row['id_pasien']; ?>&&id_user=<?php echo $row['id_user']; ?>"><i class="dw dw-edit-1"></i> Edit</a> | 

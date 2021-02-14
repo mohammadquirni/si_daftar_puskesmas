@@ -17,6 +17,7 @@
     <title>Beranda - SI Pendaftaran Pasien</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- add to homescreen -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="manifest.json">
 
@@ -31,16 +32,17 @@
 
   <?php
 		if($_POST){
-      // post jadwal periksa
+      // post pasien
       $Pasien->id_pasien = $_POST["id_pasien"];
       $Pasien->nik = $_POST["nik"];
       $Pasien->nama = $_POST["nama"];
-      $Pasien->tempat_tanggal_lahir = $_POST["tempat_tanggal_lahir"];
+      $Pasien->tempat_lahir = $_POST["tempat_lahir"];
       $Pasien->jenis_kelamin = $_POST["jenis_kelamin"];
       $Pasien->alamat = $_POST["alamat"];
       $Pasien->no_telpon = $_POST["no_telpon"];
       $Pasien->gol_darah = $_POST["gol_darah"];
       $Pasien->kepala_keluarga = $_POST["kepala_keluarga"];
+      $Pasien->tgl_lahir = $_POST["tgl_lahir"];
 
       // post jadwal periksa
 			$Jadwal_Periksa->id_jadwal_periksa = $_POST["id_jadwal_periksa"];
