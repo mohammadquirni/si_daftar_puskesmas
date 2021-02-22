@@ -83,6 +83,14 @@ class Jadwal_Periksa {
 		return $stmt;
 	}
 
+	function infoPendaftaran() {
+		$query = "SELECT A.id_jadwal_periksa, B.nama AS nama_pasien, C.nama_poli, A.tgl_periksa, A.gejala_penyakit, A.berat_badan, A.tinggi_badan, A.nomor_antrian FROM {$this->table_jadwal_periksa} A LEFT JOIN {$this->table_pasien} B ON A.id_pasien=B.id_pasien LEFT JOIN {$this->table_poli} C ON A.id_poli= C.id_poli WHERE A.tgl_periksa=CURDATE(); ORDER BY id_jadwal_periksa DESC LIMIT 1";
+		$stmt = $this->conn->prepare( $query );
+		$stmt->execute();
+
+		return $stmt;
+	}
+
 	function readOne() {
 		$query = "SELECT * FROM {$this->table_jadwal_periksa} WHERE id_jadwal_periksa=:id_jadwal_periksa LIMIT 0,1";
 		$stmt = $this->conn->prepare($query);

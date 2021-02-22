@@ -31,6 +31,11 @@
 									<span class="micon dw dw-wall-clock1"></span><span class="mtext">Jadwal Periksa Poli</span>
 								</a>
 							</li>
+							<li>
+								<a href="jadwal-dokter-poli.php?id=<?php echo $_SESSION['id_poli']; ?>" class="dropdown-toggle no-arrow">
+									<span class="micon dw dw-wall-clock1"></span><span class="mtext">Jadwal Dokter</span>
+								</a>
+							</li>
 						<?php elseif ($_SESSION['hak_akses'] == 'administrasi'): ?>
 							<!-- Administrasi -->
 							<li>
